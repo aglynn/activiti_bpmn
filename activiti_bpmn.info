@@ -1,0 +1,5 @@
+name = Activiti BPMN
+description = Upload your Activiti bpmn file into a content type in Drupal.
+package = Activiti
+core = 7.x
+
