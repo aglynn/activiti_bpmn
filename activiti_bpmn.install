@@ -84,7 +84,61 @@ function _activiti_installed_fields() {
         'uri_scheme' => 'private',
       ),
     ),
-    
+    'field_user_task' => array(
+      'translatable' => '0',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'field_name' => 'field_user_task',
+      'type' => 'text',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '-1',
+    ),
+    'field_start_event' => array(
+      'translatable' => '0',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'field_name' => 'field_start_event',
+      'type' => 'text',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '-1',
+    ),
+    'field_exclusive_gateway' => array(
+      'translatable' => '0',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'field_name' => 'field_exclusive_gateway',
+      'type' => 'text',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '-1',
+    ),
+    'field_sequence_flow' => array(
+      'translatable' => '0',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'field_name' => 'field_sequence_flow',
+      'type' => 'text',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+    ),
+    'field_end_event' => array(
+      'translatable' => '0',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'field_name' => 'field_end_event',
+      'type' => 'text',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+    ),
   );
 }
 
@@ -121,6 +175,191 @@ function _activiti_installed_instances() {
         'user_register_form' => FALSE,
       ),
     ),
+    'field_user_task' => array(
+      'label' => 'User Task',
+      'widget' => array(
+        'weight' => '3',
+        'type' => 'text_textfield',
+        'active' => 1,
+        'settings' => array(
+          'size' => '60',
+        ),
+      ),
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'type' => 'text_default',
+          'settings' => array(),
+          'weight' => 3,
+        ),
+        'teaser' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => 0,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_user_task',
+      'entity_type' => 'node',
+      'bundle' => 'node_activiti',
+    ),
+    'field_start_event' => array(
+      'label' => 'Start Event',
+      'widget' => array(
+        'weight' => '4',
+        'type' => 'text_textfield',
+        'active' => 1,
+        'settings' => array(
+          'size' => '60',
+        ),
+      ),
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'type' => 'text_default',
+          'settings' => array(),
+          'weight' => 4,
+        ),
+        'teaser' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => 0,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_start_event',
+      'entity_type' => 'node',
+      'bundle' => 'node_activiti',
+    ),
+    'field_exclusive_gateway' => array(
+      'label' => 'Exclusive Gateway',
+      'widget' => array(
+        'weight' => '5',
+        'type' => 'text_textfield',
+        'active' => 1,
+        'settings' => array(
+          'size' => '60',
+        ),
+      ),
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'type' => 'text_default',
+          'settings' => array(),
+          'weight' => 5,
+        ),
+        'teaser' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => 0,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_exclusive_gateway',
+      'entity_type' => 'node',
+      'bundle' => 'node_activiti',
+    ),
+    'field_sequence_flow' => array(
+      'label' => 'Sequence Flow',
+      'widget' => array(
+        'weight' => '6',
+        'type' => 'text_textfield',
+        'active' => 1,
+        'settings' => array(
+          'size' => '60',
+        ),
+      ),
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'type' => 'text_default',
+          'settings' => array(),
+          'weight' => 6,
+        ),
+        'teaser' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => 0,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_sequence_flow',
+      'entity_type' => 'node',
+      'bundle' => 'node_activiti',
+    ),
+    'field_end_event' => array(
+      'label' => 'End Event',
+      'widget' => array(
+        'weight' => '7',
+        'type' => 'text_textfield',
+        'active' => 1,
+        'settings' => array(
+          'size' => '60',
+        ),
+      ),
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'type' => 'text_default',
+          'settings' => array(),
+          'weight' => 7,
+        ),
+        'teaser' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => 0,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_end_event',
+      'entity_type' => 'node',
+      'bundle' => 'node_activiti',
+    ),
+
+
   );
 }
+
+
+
+
+
+
+
+
 
