@@ -89,3 +89,67 @@ function activiti_bpmn_node_access($node, $op, $account) {
   return NODE_ACCESS_DENY;
 }
 
+
+//function activiti_bpmn_node_insert($node) {
+///if($node->type == "node_activiti"){
+//krumo($node);
+//$filepath = drupal_realpath($node->activiti_diagramfile['und'][0]['uri']);
+//$file_contents = file_get_contents($filepath);
+
+//  drupal_set_message(t($file_contents), 'warning');
+
+///}
+  
+//}
+
+
+function activiti_bpmn_form_alter(&$form, &$form_state, $form_id) {
+
+  if($form_id == "node_activiti_node_form") {
+  
+ // dsm($form);  // pretty print array using Krumo to messages
+
+
+    $form['#submit'][] = 'activiti_bpmn_submission_function';
+
+ //dsm($form);
+  }
+
+}
+
+
+function activiti_bpmn_submission_function($form) {
+  
+
+  dsm("hello");
+  dsm($form);
+
+
+  $filepath = drupal_realpath($form['activiti_diagramfile']['und'][0]['#file']->uri);
+  //$file_contents = file_get_contents($filepath);
+
+  $xml = simplexml_load_file($filepath);
+
+dsm($xml);
+
+dsm("1" . $xml->getName());
+
+foreach($xml->children() as $child) {
+  dsm("2" . $child->getName() . ": " . $child . "<br>");
+
+  foreach($child->children() as $grandchild) {
+    dsm("3" . $grandchild->getName() . ": " . $grandchild . "<br>");
+
+    foreach($grandchild->children() as $greatgrandchild) {
+        dsm("4" . $greatgrandchild->getName() . ": " . $greatgrandchild . "<br>");
+        foreach($greatgrandchild->children() as $greatgreatgrandchild) {
+          dsm("5" . $greatgreatgrandchild->getName() . ": " . $greatgreatgrandchild . "<br>");
+        }
+      }
+    }
+  }
+
+
+
+
+}
