@@ -32,3 +32,60 @@ function activiti_bpmn_menu() {
 
   return $items;
 }
+
+
+function activiti_bpmn_permission() {
+  
+  $permissions['create activiti bpmn nodes'] = array(
+    'title' => t('Create activiti bpmn nodes'),
+    'description' => t('Allow users to create simple content type nodes'),
+  );
+  $permissions['view activiti bpmn nodes'] = array(
+    'title' => t('View activiti bpmn nodes'),
+    'description' => t('Allow users to view activiti bpmn nodes'),
+  );
+  $permissions['edit activiti bpmn nodes'] = array(
+    'title' => t('Edit activiti bpmn nodes'),
+    'description' => t('Allow users to edit activiti bpmn nodes'),
+  );
+  $permissions['delete activiti bpmn nodes'] = array(
+    'title' => t('Delete activiti bpmn nodes'),
+    'description' => t('Allow users to delete activiti bpmn nodes'),
+  );
+  
+  return $permissions;
+}
+
+function activiti_bpmn_node_access($node, $op, $account) {
+  // just in case the $node parameter is not really a node object or
+  // the $node->type is one other than our own
+  $type = is_string($node) ? $node : $node->type;
+  if (! is_object($node) || $type != 'node_activiti') {
+    return NODE_ACCESS_IGNORE;
+  }
+  switch ($op)  {
+    case 'create':
+      if (user_access('create activiti bpmn nodes', $account))  {
+        return NODE_ACCESS_ALLOW;
+      }
+      break;
+    case 'update':
+      if (user_access('edit activiti bpmn nodes', $account))  {
+        return NODE_ACCESS_ALLOW;
+      }
+      break;
+    case 'delete':
+      if (user_access('delete activiti bpmn nodes', $account))  {
+        return NODE_ACCESS_ALLOW;
+      }
+      break;
+    case 'view':
+      if (user_access('view activiti bpmn nodes', $account))  {
+        return NODE_ACCESS_ALLOW;
+      }
+      break;
+  }
+  // if none of the conditions above are met we will deny access
+  return NODE_ACCESS_DENY;
+}
+

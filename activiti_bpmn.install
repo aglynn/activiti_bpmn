@@ -21,6 +21,21 @@ function activiti_bpmn_install() {
 
   // Save the content type
   node_type_save($content_type);
+
+// Create all the fields we are adding to our content type.
+  // http://api.drupal.org/api/function/field_create_field/7
+  foreach (_activiti_installed_fields() as $field) {
+    field_create_field($field);
+  }
+
+  // Create all the instances for our fields.
+  // http://api.drupal.org/api/function/field_create_instance/7
+  foreach (_activiti_installed_instances() as $instance) {
+    $instance['entity_type'] = 'node';
+    $instance['bundle'] = $node_activiti['type'];
+    field_create_instance($instance);
+  }
+
 }
 
 function activiti_bpmn_uninstall() {
@@ -36,7 +51,76 @@ function activiti_bpmn_uninstall() {
   // Delete all the nodes at once
   // http://api.drupal.org/api/function/node_delete_multiple/7
   node_delete_multiple($nids);
+
+  foreach (array_keys(_activiti_installed_fields()) as $field) {
+    field_delete_field($field);
+  }
   // Delete our content type
   // http://api.drupal.org/api/function/node_type_delete/7
   node_type_delete('node_activiti');
 }
+
+
+
+/**
+ * Returns a structured array defining the fields created by this content type.
+ *
+ * This is factored into this function so it can be used in both
+ * activiti_bpmn_install() and activiti_bpmn_uninstall().
+ *
+ * @return array
+ *   An associative array specifying the fields we wish to add to our
+ *   new node type.
+ *
+ */
+function _activiti_installed_fields() {
+  $t = get_t();
+  return array(
+    'activiti_diagramfile' => array(
+      'field_name' => 'activiti_diagramfile',
+      'type'       => 'file',
+      'cardinality' => 1,
+      'settings' => array(
+        'uri_scheme' => 'private',
+      ),
+    ),
+    
+  );
+}
+
+
+/**
+ * Returns a structured array defining the instances for this content type.
+ *
+ * The instance lets Drupal know which widget to use to allow the user to enter
+ * data and how to react in different view modes.  We are going to display a
+ * page that uses a custom "birt_list" view mode.  We will set a
+ * cardinality of three allowing our content type to give the user three color
+ * fields.
+ *
+ * This is factored into this function so it can be used in both
+ * birt_install() and birt_uninstall().
+ *
+ * @return array
+ *   An associative array specifying the instances we wish to add to our new
+ *   node type.
+ *
+ * @ingroup birt
+ */
+function _activiti_installed_instances() {
+  $t = get_t();
+  return array(
+    'activiti_diagramfile' => array(
+      'field_name' => 'activiti_diagramfile',
+      'type' => 'file',
+      'label' => 'Activiti BPMN XML File',
+      'settings' => array(
+        'description_field' => 0,
+        'file_extensions' => 'bpmn',
+        'max_filesize' => '50MB',
+        'user_register_form' => FALSE,
+      ),
+    ),
+  );
+}
+
